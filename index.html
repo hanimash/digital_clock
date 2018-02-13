@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+
+
+
+
+body, *{
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    box-sizing: border-box;
+}
+section{
+    background: #000;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    
+    }
+section>div{
+    margin: 20px;
+}
+section span{
+    font-size: 20em;
+    color: #f00;
+}
+.topBox,.bottomBox{
+    width: 120px;
+    height: 150px;
+    border: 20px solid rgb(34, 1, 1);
+    margin: 0 auto;
+}
+.bottomBox{
+    border-top: none;
+    height: 140px;
+}
+.t{
+    border-top-color: #f00;
+}
+.r{
+    border-right-color: #f00;
+}
+.l{
+    border-left-color: #f00;
+}
+.b{
+    border-bottom-color: #f00;
+}
+   
+    
+    
+    </style>
+    <title>digetal</title>
+</head>
+<body>
+    <section>
+        <div>
+            <div class="topBox" id='fDTOP'></div>
+            <div class="bottomBox" id='fDBottom'></div>
+        </div>
+        <div>
+            <div class="topBox" id='sDTOP'></div>
+            <div class="bottomBox" id='sDBottom'></div>
+        </div>
+        <div><span>:</span></div>
+        <div>
+            <div class="topBox" id='fDTOP1'></div>
+            <div class="bottomBox" id='fDBottom1'></div>
+        </div>
+        <div>
+            <div class="topBox" id='sDTOP1'></div>
+            <div class="bottomBox" id='sDBottom1'></div>
+        </div>
+        <div><span>:</span></div>
+        <div>
+            <div class="topBox" id='fDTOP2'></div>
+            <div class="bottomBox" id='fDBottom2'></div>
+        </div>
+        <div>
+            <div class="topBox" id='sDTOP2'></div>
+            <div class="bottomBox" id='sDBottom2'></div>
+        </div>
+    </section>
+
+    <input type="namber" id="n">
+    <button id="btn">set</button>
+    <script>
+        $(function(){
+            let top1=$('#fDTOP');
+            let bottom1=$('#fDBottom');
+            let top2=$('#sDTOP');
+            let bottom2=$('#sDBottom');
+            let top11=$('#fDTOP1');
+            let bottom11=$('#fDBottom1');
+            let top21=$('#sDTOP1');
+            let bottom21=$('#sDBottom1');
+            let top12=$('#fDTOP2');
+            let bottom12=$('#fDBottom2');
+            let top22=$('#sDTOP2');
+            let bottom22=$('#sDBottom2');
+            function setTime(){
+                var date= new Date();
+                var ho=date.getHours();
+                var mi=date.getMinutes();
+                var  sec=date.getSeconds();
+                setTwoDig(ho,top1,bottom1,top2,bottom2);        
+                setTwoDig(mi,top11,bottom11,top21,bottom21); 
+                setTwoDig(sec,top12,bottom12,top22,bottom22); 
+
+            }
+            
+            setInterval(setTime,1000);
+            var date= new Date();
+            var ho=date.getHours();
+            var mi=date.getMinutes();
+            setTwoDig(ho,top1,bottom1,top2,bottom2);        
+            setTwoDig(mi,top11,bottom11,top21,bottom21);            
+  
+            $('#btn').on('click',function(){
+                let n=$('#n').val();
+                setTwoDig(n);
+            });
+            function setTwoDig(n,el1,el2,el3,el4){
+                n=Number(n);
+                var d1=n%10;
+                var d2=(n-d1)/10;
+                console.log({d1,d2});
+                setnum(d2,el1,el2);
+                setnum(d1,el3,el4);
+            }
+            function startTimer(){
+                var num=0,time=1000,up=true;
+                function startCounter(){
+                    setnum(num,top1,bottom1);
+                    setnum(num,top2,bottom2);
+                    if(up && num<10){
+                        num++;
+                        time=1000;
+                        clearInterval(timer);
+                        timer=setInterval(startCounter,time);
+                        if(num==9){
+                            up=false;
+                        }
+                    }else if(!up){
+                        time=200;
+                        clearInterval(timer);
+                        timer=setInterval(startCounter,time);
+                        num--;
+                        if(num==0){up=true;}
+                    }
+                }
+                startCounter();
+            }
+        });
+
+        function setnum(n=0,div1,div2){
+            div1.removeClass('t r l b');
+            div2.removeClass('t r l b');
+            switch(Number(n)){
+                case 0:
+                    div1.addClass('t r l');
+                    div2.addClass('r l b');
+                    break;
+                case 1:
+                    div1.addClass('r');
+                    div2.addClass('r');
+                    break;
+                case 2:
+                    div1.addClass('t r b');
+                    div2.addClass('l b');
+                    break;
+                case 3:
+                    div1.addClass('t r b');
+                    div2.addClass('r b');
+                    break;
+                case 4:
+                    div1.addClass('r l b');
+                    div2.addClass('r');
+                    break;
+                case 5:
+                    div1.addClass('t l b');
+                    div2.addClass('r b');
+                    break;
+                case 6:
+                    div1.addClass('t l b');
+                    div2.addClass('r l b');
+                    break;
+                case 7:
+                    div1.addClass('t r');
+                    div2.addClass('r');
+                    break;
+                case 8:
+                    div1.addClass('t r l b');
+                    div2.addClass('r l b');
+                    break;
+                case 9:
+                    div1.addClass('t r l b');
+                    div2.addClass('r b');
+                    break;
+                default:
+                    div1.removeClass('t r l b');
+                    div2.removeClass('t r l b');
+            }
+        }
+    </script> 
+</body>
+</html>
