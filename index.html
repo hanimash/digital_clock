@@ -89,8 +89,6 @@ section span{
         </div>
     </section>
 
-    <input type="namber" id="n">
-    <button id="btn">set</button>
     <script>
         $(function(){
             let top1=$('#fDTOP');
@@ -123,10 +121,6 @@ section span{
             setTwoDig(ho,top1,bottom1,top2,bottom2);        
             setTwoDig(mi,top11,bottom11,top21,bottom21);            
   
-            $('#btn').on('click',function(){
-                let n=$('#n').val();
-                setTwoDig(n);
-            });
             function setTwoDig(n,el1,el2,el3,el4){
                 n=Number(n);
                 var d1=n%10;
