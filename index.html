@@ -4,59 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
+            body, *{
+                margin: 0;
+                padding: 0;
+                font-size: 10px;
+                box-sizing: border-box;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background: #000;
+            }
+            section{
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: flex-end;
+                Width: 100vw;
+                
+                }
+            section>div{
+                margin: 20px;
+            }
+            section span{
+                font-size: 20em;
+                color: rgb(255, 123, 0);
+            }
+            .topBox,.bottomBox{
+                width: 120px;
+                height: 150px;
+                border: 30px solid rgba(255, 123, 0, 0.062);
+                margin: 0 auto;
+            }
+            .topBox{
+                border-radius: 15px 15px 0 0;
+            }
+            .bottomBox{
+                border-top: none;
+                height: 140px;
+                border-radius:0 0 15px 15px;
 
-
-
-
-body, *{
-    margin: 0;
-    padding: 0;
-    font-size: 10px;
-    box-sizing: border-box;
-    
-}
-section{
-    background: #000;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: flex-end;
-    width:100%;
-    }
-section>div{
-    margin: 20px;
-}
-section span{
-    font-size: 20em;
-    color: #f00;
-}
-.topBox,.bottomBox{
-    width: 120px;
-    height: 150px;
-    border: 20px solid rgb(34, 1, 1);
-    margin: 0 auto;
-}
-.bottomBox{
-    border-top: none;
-    height: 140px;
-}
-.t{
-    border-top-color: #f00;
-}
-.r{
-    border-right-color: #f00;
-}
-.l{
-    border-left-color: #f00;
-}
-.b{
-    border-bottom-color: #f00;
-}
-   
-    
-    
+            }
+            .t{
+                border-top-color: rgb(255, 123, 0);
+            }
+            .r{
+                border-right-color: rgb(255, 123, 0);
+            }
+            .l{
+                border-left-color: rgb(255, 123, 0);
+            }
+            .b{
+                border-bottom-color: rgb(255, 123, 0);
+            }
     </style>
     <title>digetal</title>
 </head>
@@ -112,7 +116,6 @@ section span{
                 setTwoDig(ho,top1,bottom1,top2,bottom2);        
                 setTwoDig(mi,top11,bottom11,top21,bottom21); 
                 setTwoDig(sec,top12,bottom12,top22,bottom22); 
-
             }
             
             setInterval(setTime,1000);
@@ -122,6 +125,10 @@ section span{
             setTwoDig(ho,top1,bottom1,top2,bottom2);        
             setTwoDig(mi,top11,bottom11,top21,bottom21);            
   
+            $('#btn').on('click',function(){
+                let n=$('#n').val();
+                setTwoDig(n);
+            });
             function setTwoDig(n,el1,el2,el3,el4){
                 n=Number(n);
                 var d1=n%10;
@@ -154,7 +161,6 @@ section span{
                 startCounter();
             }
         });
-
         function setnum(n=0,div1,div2){
             div1.removeClass('t r l b');
             div2.removeClass('t r l b');
